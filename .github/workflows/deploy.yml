@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: "18" # Use the Node.js version you're using
 
+      - name: Install Serverless Framework v3
+        run: npm install -g serverless@3
+
       - name: Install Dependencies
         run: npm install
 
