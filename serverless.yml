@@ -1,0 +1,31 @@
+service: learning-auto-deployment
+frameworkVersion: "3"
+
+custom:
+  stages:
+    dev: development
+    uat: staging
+    production: prod
+  regions:
+    dev: ap-southeast-1
+    uat: ap-southeast-1
+    production: ap-southeast-1
+
+  currentStage: ${self:custom.stages.${self:provider.stage}, 'dev'}
+  currentRegion: ${self:custom.regions.${self:provider.stage}, 'ap-southeast-1'}
+
+
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ${self:custom.currentRegion}
+  stage: ${opt:stage, 'dev'} # Default stage is 'dev'
+
+functions:
+  api:
+    handler: src/handlers/getReq.getReq
+    events:
+      - httpApi:
+          path: /
+          method: get
