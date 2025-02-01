@@ -1,5 +1,5 @@
 service: learning-auto-deployment
-frameworkVersion: "3"
+frameworkVersion: "4"
 
 custom:
   stages:
